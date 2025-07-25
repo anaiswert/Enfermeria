@@ -3,27 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malla Interactiva</title>
+  <title>Malla Curricular Interactiva</title>
+
+  <!-- Vinculación al CSS -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>Malla Interactiva - Enfermería</h1>
-    <div id="progress-container">
-      <div id="progress-bar"><span id="progress-text">0%</span></div>
-    </div>
+    Malla Curricular Interactiva
   </header>
 
-  <main id="malla">
-    <!-- Aquí se insertarán los semestres y ramos vía JS dinámicamente -->
+  <main>
+    <!-- Gráfico de progreso -->
+    <div id="graph">
+      <span id="progress-text">0%</span>
+    </div>
+
+    <!-- Contenedor de ramos -->
+    <div id="container">
+      <!-- Los ramos se agregarán dinámicamente desde script.js -->
+    </div>
   </main>
 
-  <footer>
-    <canvas id="chart" width="400" height="200"></canvas>
-    <p>Total Créditos Aprobados: <span id="creditos-aprobados">0</span> / <span id="creditos-totales">232</span></p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lógica interactiva -->
   <script src="script.js"></script>
 </body>
 </html>
