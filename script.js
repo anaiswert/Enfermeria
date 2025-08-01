@@ -1,148 +1,112 @@
-// Datos base: ramos, créditos y prerrequisitos
-const ramos = [
-  { codigo: "BIOCEL", nombre: "Biología Celular Básica Enfermería", creditos: 3, ano: 1, semestre: 1, prerrequisitos: [] },
-  { codigo: "PSICO", nombre: "Psicología General Y Evolutiva", creditos: 4, ano: 1, semestre: 1, prerrequisitos: [] },
-  { codigo: "SOCIO1", nombre: "Socioantropología I", creditos: 2, ano: 1, semestre: 1, prerrequisitos: [] },
-  { codigo: "FUND1", nombre: "Fundamentos De Enfermería", creditos: 2, ano: 1, semestre: 1, prerrequisitos: [] },
-  { codigo: "PROMO", nombre: "Promoción de la Salud", creditos: 3, ano: 1, semestre: 1, prerrequisitos: [] },
-  { codigo: "ING1", nombre: "Inglés Comunicativo I", creditos: 3, ano: 1, semestre: 1, prerrequisitos: [] },
+// script.js completo para malla interactiva Enfermería
 
-  { codigo: "HISTO", nombre: "Histología Humana - Enfermería", creditos: 3, ano: 1, semestre: 2, prerrequisitos: ["BIOCEL"] },
-  { codigo: "ANATO", nombre: "Anatomía Descriptiva - Enfermería", creditos: 4, ano: 1, semestre: 2, prerrequisitos: ["BIOCEL"] },
-  { codigo: "PREV", nombre: "Prevención En Salud", creditos: 3, ano: 1, semestre: 2, prerrequisitos: ["FUND1", "PROMO"] },
-  { codigo: "SOCIO2", nombre: "Socioantropología II", creditos: 2, ano: 1, semestre: 2, prerrequisitos: ["SOCIO1"] },
-  { codigo: "QUIM", nombre: "Química General Y Básica", creditos: 6, ano: 1, semestre: 2, prerrequisitos: [] },
-  { codigo: "ING2", nombre: "Inglés Comunicativo II", creditos: 3, ano: 1, semestre: 2, prerrequisitos: ["ING1"] },
-
-  { codigo: "FISIO", nombre: "Fisiología Enfermería", creditos: 4, ano: 2, semestre: 3, prerrequisitos: ["HISTO", "ANATO", "QUIM"] },
-  { codigo: "BIOQ", nombre: "Bioquímica - Enfermería", creditos: 3, ano: 2, semestre: 3, prerrequisitos: ["QUIM"] },
-  { codigo: "COMUNITARIA1", nombre: "Enfermería En Salud Familiar Y Comunitaria", creditos: 4, ano: 2, semestre: 3, prerrequisitos: ["PREV", "SOCIO2"] },
-  { codigo: "GEST1", nombre: "Fundamentos De La Gestión Del Cuidado De Enfermería", creditos: 4, ano: 2, semestre: 3, prerrequisitos: ["HISTO", "ANATO", "PREV"] },
-  { codigo: "ETICA", nombre: "Fundamentos De Ética En Enfermería", creditos: 2, ano: 2, semestre: 3, prerrequisitos: [] },
-  { codigo: "COMP1", nombre: "Complementaria I", creditos: 2, ano: 2, semestre: 3, prerrequisitos: [] },
-
-  { codigo: "FISIOPATO", nombre: "Fisiopatología Enfermería", creditos: 4, ano: 2, semestre: 4, prerrequisitos: ["FISIO", "BIOQ"] },
-  { codigo: "FARMA", nombre: "Farmacología - Enfermería", creditos: 3, ano: 2, semestre: 4, prerrequisitos: ["FISIO", "BIOQ"] },
-  { codigo: "GEST2", nombre: "Gestión Del Cuidado De Enfermería En El Adulto I", creditos: 4, ano: 2, semestre: 4, prerrequisitos: ["FISIO", "BIOQ", "COMUNITARIA1", "GEST1", "ETICA"] },
-  { codigo: "ADULTO1", nombre: "Enfermería En El Adulto", creditos: 5, ano: 2, semestre: 4, prerrequisitos: ["FISIO", "GEST1"] },
-  { codigo: "INTERACCION", nombre: "Interacción Humana", creditos: 2, ano: 2, semestre: 4, prerrequisitos: ["ETICA"] },
-  { codigo: "MICROBIO", nombre: "Microbiología Enfermería Obstetricia", creditos: 4, ano: 2, semestre: 4, prerrequisitos: ["FISIO", "BIOQ"] },
-
-  { codigo: "GERENCIA", nombre: "Gerencia En Salud Y Enfermería", creditos: 3, ano: 3, semestre: 5, prerrequisitos: ["GEST2", "ADULTO1"] },
-  { codigo: "GEST3", nombre: "Gestión Del Cuidado De Enfermería En El Adulto II", creditos: 6, ano: 3, semestre: 5, prerrequisitos: ["GEST2", "ADULTO1"] },
-  { codigo: "METCUAN", nombre: "Metodología De La Investigación Cuantitativa", creditos: 3, ano: 3, semestre: 5, prerrequisitos: [] },
-  { codigo: "LIDERAZGO", nombre: "Comunicación Y Liderazgo", creditos: 2, ano: 3, semestre: 5, prerrequisitos: ["INTERACCION"] },
-  { codigo: "COMP2", nombre: "Complementaria II", creditos: 2, ano: 3, semestre: 5, prerrequisitos: [] },
-
-  { codigo: "PROYECTOS", nombre: "Gestión De Proyectos", creditos: 3, ano: 3, semestre: 6, prerrequisitos: ["GERENCIA", "GEST3", "METCUAN"] },
-  { codigo: "AMAYOR", nombre: "Enfermería Y Gestión Del Cuidado En El Adulto Mayor", creditos: 5, ano: 3, semestre: 6, prerrequisitos: ["GEST3"] },
-  { codigo: "METQUALI", nombre: "Metodología De La Investigación Cualitativa", creditos: 3, ano: 3, semestre: 6, prerrequisitos: [] },
-  { codigo: "NINO1", nombre: "Enfermería Y Gestión Del Cuidado En El Niño Y Adolescente I", creditos: 5, ano: 3, semestre: 6, prerrequisitos: ["GEST3"] },
-  { codigo: "BIOETICA", nombre: "Bioética Y Enfermería", creditos: 2, ano: 3, semestre: 6, prerrequisitos: [] },
-  { codigo: "SM", nombre: "Enfermería En Salud Mental", creditos: 4, ano: 3, semestre: 6, prerrequisitos: ["LIDERAZGO"] },
-
-  { codigo: "URGENCIAS", nombre: "Enfermería En Urgencias Y Desastres", creditos: 3, ano: 4, semestre: 7, prerrequisitos: ["AMAYOR", "NINO1", "SM"] },
-  { codigo: "EBE", nombre: "Enfermería Basada En La Evidencia", creditos: 3, ano: 4, semestre: 7, prerrequisitos: ["METQUALI"] },
-  { codigo: "COMUNITARIA2", nombre: "Enfermería En Salud Familiar Y Comunitaria II", creditos: 4, ano: 4, semestre: 7, prerrequisitos: ["AMAYOR", "NINO1"] },
-  { codigo: "NINO2", nombre: "Enfermería Y Gestión Del Cuidado En El Niño Y Adolescente II", creditos: 6, ano: 4, semestre: 7, prerrequisitos: ["NINO1"] },
-  { codigo: "GSM", nombre: "Gestión Del Cuidado De Enfermería En Salud Mental", creditos: 3, ano: 4, semestre: 7, prerrequisitos: ["SM"] },
-
-  { codigo: "GURGENCIAS", nombre: "Gestión Del Cuidado De Enfermería En Urgencias Y Desastres", creditos: 6, ano: 4, semestre: 8, prerrequisitos: ["URGENCIAS", "NINO2", "GSM"] },
-  { codigo: "CALIDAD", nombre: "Calidad Y Seguridad En Salud", creditos: 3, ano: 4, semestre: 8, prerrequisitos: ["EBE"] },
-  { codigo: "GFAMILIAR", nombre: "Gestión Del Cuidado De Enfermería En Salud Familiar Y Comunitaria", creditos: 6, ano: 4, semestre: 8, prerrequisitos: ["COMUNITARIA2", "NINO2", "GSM"] },
-
-  { codigo: "INTEREXT", nombre: "Internado Extramural", creditos: 20, ano: 5, semestre: 9, prerrequisitos: [] },
-  { codigo: "INTERINT", nombre: "Internado Intramural", creditos: 20, ano: 5, semestre: 10, prerrequisitos: [] },
-  { codigo: "EXFINAL", nombre: "Examen De Titulación", creditos: 0, ano: 5, semestre: 10, prerrequisitos: [] }
+const malla = [
+  { codigo: "ANATO", nombre: "Anatomía Humana", creditos: 4, semestre: 1, ano: 1, prerrequisitos: [] },
+  { codigo: "BIOQUIM", nombre: "Bioquímica", creditos: 5, semestre: 1, ano: 1, prerrequisitos: [] },
+  { codigo: "FISIO", nombre: "Fisiología", creditos: 5, semestre: 2, ano: 1, prerrequisitos: ["BIOQUIM"] },
+  { codigo: "ENF101", nombre: "Fundamentos de Enfermería", creditos: 6, semestre: 2, ano: 1, prerrequisitos: ["ANATO"] },
+  { codigo: "ENF201", nombre: "Cuidados Básicos", creditos: 6, semestre: 1, ano: 2, prerrequisitos: ["ENF101"] },
+  { codigo: "ENF202", nombre: "Farmacología", creditos: 4, semestre: 1, ano: 2, prerrequisitos: ["FISIO"] },
+  { codigo: "ENF301", nombre: "Salud del Adulto", creditos: 8, semestre: 2, ano: 2, prerrequisitos: ["ENF201"] },
+  { codigo: "ENF401", nombre: "Salud Mental", creditos: 5, semestre: 1, ano: 3, prerrequisitos: ["ENF301"] },
+  { codigo: "ENF402", nombre: "Salud Materna", creditos: 6, semestre: 1, ano: 3, prerrequisitos: ["ENF301"] },
+  { codigo: "ENF403", nombre: "Salud Infantil", creditos: 6, semestre: 2, ano: 3, prerrequisitos: ["ENF402"] },
+  { codigo: "ENF501", nombre: "Internado Clínica Adulto", creditos: 10, semestre: 1, ano: 4, prerrequisitos: ["ENF301"] },
+  { codigo: "ENF502", nombre: "Internado Comunitario", creditos: 8, semestre: 1, ano: 4, prerrequisitos: ["ENF403"] }
 ];
 
-const TOTAL_CREDITOS = 226;
-let creditosAprobados = 0;
+const contenedor = document.getElementById("contenedor-malla");
+const progresoBarra = document.getElementById("barra-progreso");
+const progresoTexto = document.getElementById("porcentaje-progreso");
+const creditosTexto = document.getElementById("creditos-aprobados");
+const graficoCanvas = document.getElementById("grafico-torta");
 
-function crearMalla() {
-  const contenedor = document.getElementById("contenedor-malla");
+let ramosAprobados = [];
+
+function agruparPorSemestre(data) {
   const agrupados = {};
-
-  // Agrupar ramos por año y semestre
-  ramos.forEach(ramo => {
-    const key = `Año ${ramo.ano} - Semestre ${ramo.semestre}`;
-    if (!agrupados[key]) agrupados[key] = [];
-    agrupados[key].push(ramo);
+  data.forEach(r => {
+    const clave = `Año ${r.ano} - Semestre ${r.semestre}`;
+    if (!agrupados[clave]) agrupados[clave] = [];
+    agrupados[clave].push(r);
   });
-
-  for (const [semestre, listaRamos] of Object.entries(agrupados)) {
-    const divSemestre = document.createElement("div");
-    divSemestre.className = "semestre";
-    divSemestre.innerHTML = `<h2>${semestre}</h2>`;
-
-    listaRamos.forEach(ramo => {
-      const divRamo = document.createElement("div");
-      divRamo.className = "ramo";
-      divRamo.textContent = `${ramo.nombre} (${ramo.creditos} cr)`;
-      divRamo.dataset.codigo = ramo.codigo;
-      divRamo.dataset.creditos = ramo.creditos;
-      divRamo.dataset.prerrequisitos = JSON.stringify(ramo.prerrequisitos);
-      divRamo.onclick = () => aprobarRamo(divRamo);
-
-      divSemestre.appendChild(divRamo);
-    });
-
-    contenedor.appendChild(divSemestre);
-  }
+  return agrupados;
 }
 
-function aprobarRamo(div) {
-  if (div.classList.contains("aprobado")) return;
+function crearMalla() {
+  contenedor.innerHTML = "";
+  const agrupados = agruparPorSemestre(malla);
+  Object.keys(agrupados).forEach(sem => {
+    const div = document.createElement("div");
+    div.className = "semestre";
+    const h2 = document.createElement("h2");
+    h2.textContent = sem;
+    div.appendChild(h2);
 
-  const prerreqs = JSON.parse(div.dataset.prerrequisitos);
-  const cumplidos = prerreqs.every(cod =>
-    document.querySelector(`.ramo[data-codigo='${cod}']`)?.classList.contains("aprobado")
-  );
+    agrupados[sem].forEach(ramo => {
+      const boton = document.createElement("div");
+      boton.className = "ramo";
+      boton.dataset.codigo = ramo.codigo;
+      boton.textContent = `${ramo.codigo} (${ramo.creditos} cr)`;
+      boton.addEventListener("click", () => toggleRamo(ramo, boton));
+      div.appendChild(boton);
+    });
 
-  if (!cumplidos) return;
+    contenedor.appendChild(div);
+  });
+}
 
-  div.classList.add("aprobado");
-  creditosAprobados += parseInt(div.dataset.creditos);
+function toggleRamo(ramo, boton) {
+  const aprobado = ramosAprobados.includes(ramo.codigo);
+  if (!aprobado) {
+    const puede = ramo.prerrequisitos.every(pr => ramosAprobados.includes(pr));
+    if (!puede) {
+      alert("Primero debes aprobar los prerrequisitos: " + ramo.prerrequisitos.join(", "));
+      return;
+    }
+    ramosAprobados.push(ramo.codigo);
+    boton.classList.add("aprobado");
+  } else {
+    ramosAprobados = ramosAprobados.filter(c => c !== ramo.codigo);
+    boton.classList.remove("aprobado");
+  }
   actualizarProgreso();
 }
 
 function actualizarProgreso() {
-  const porcentaje = Math.round((creditosAprobados / TOTAL_CREDITOS) * 100);
-  document.getElementById("creditos-aprobados").textContent = creditosAprobados;
-  document.getElementById("barra-progreso").value = porcentaje;
-  document.getElementById("porcentaje-progreso").textContent = `${porcentaje}%`;
-  actualizarGrafico(porcentaje);
+  const totalCreditos = malla.reduce((acc, r) => acc + r.creditos, 0);
+  const creditosAprobados = malla.filter(r => ramosAprobados.includes(r.codigo))
+                                 .reduce((acc, r) => acc + r.creditos, 0);
+  const porcentaje = Math.round((creditosAprobados / totalCreditos) * 100);
+
+  progresoBarra.value = porcentaje;
+  progresoTexto.textContent = porcentaje + "%";
+  creditosTexto.textContent = creditosAprobados;
+
+  actualizarGrafico(creditosAprobados, totalCreditos - creditosAprobados);
 }
 
 let grafico;
-function inicializarGrafico() {
-  const ctx = document.getElementById('grafico-torta').getContext('2d');
-  grafico = new Chart(ctx, {
-    type: 'pie',
+function actualizarGrafico(aprobados, restantes) {
+  if (grafico) grafico.destroy();
+  grafico = new Chart(graficoCanvas, {
+    type: 'doughnut',
     data: {
-      labels: ['Aprobado', 'Restante'],
+      labels: ["Aprobados", "Restantes"],
       datasets: [{
-        data: [0, 100],
-        backgroundColor: ['#809bce', '#eac4d5']
+        data: [aprobados, restantes],
+        backgroundColor: ["#809bce", "#eac4d5"],
+        borderWidth: 1
       }]
     },
     options: {
-      responsive: true,
       plugins: {
-        legend: {
-          display: false
-        }
-      }
+        legend: { display: false },
+      },
+      cutout: '70%'
     }
   });
 }
 
-function actualizarGrafico(porcentaje) {
-  grafico.data.datasets[0].data = [porcentaje, 100 - porcentaje];
-  grafico.update();
-}
-
-window.onload = () => {
-  crearMalla();
-  inicializarGrafico();
-};
+crearMalla();
+actualizarProgreso();
