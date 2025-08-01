@@ -1,107 +1,104 @@
-/* estilos.css */
-
 :root {
-  --color-1: #809bce;
-  --color-2: #95b8d1;
-  --color-3: #b8e0d2;
-  --color-4: #d6eadf;
-  --color-5: #eac4d5;
-  --color-texto: #2e2e2e;
-  --color-fondo: #ffffff;
+  --color-uno: #809bce;
+  --color-dos: #95b8d1;
+  --color-tres: #b8e0d2;
+  --color-cuatro: #d6eadf;
+  --color-cinco: #eac4d5;
 }
 
 body {
-  margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: var(--color-fondo);
-  color: var(--color-texto);
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-cuatro);
+  color: #333;
 }
 
 header {
   text-align: center;
-  margin-bottom: 1rem;
+  background-color: var(--color-dos);
+  padding: 1rem;
 }
 
 h1 {
-  color: var(--color-1);
-  font-size: 2rem;
+  margin: 0.5rem 0;
 }
 
-.progreso {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem 0;
+#progreso-global {
+  margin-top: 1rem;
 }
 
 progress {
-  width: 80%;
-  height: 1.2rem;
-  margin-top: 0.5rem;
+  width: 50%;
+  height: 20px;
+  margin: 0.5rem;
 }
 
-#contenedor-malla {
+main {
+  padding: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1rem;
 }
 
 .semestre {
-  border-radius: 1rem;
-  background-color: var(--color-2);
+  background-color: white;
+  border: 2px solid var(--color-dos);
+  border-radius: 15px;
   padding: 1rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .semestre h2 {
-  font-size: 1.2rem;
-  color: var(--color-5);
-  margin-bottom: 0.5rem;
+  background-color: var(--color-uno);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
 }
 
 .ramo {
-  background-color: var(--color-4);
-  margin-bottom: 0.5rem;
-  border-left: 8px solid var(--color-3);
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
+  background-color: var(--color-cinco);
+  margin: 0.4rem 0;
+  padding: 0.5rem;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: 0.3s ease;
+  font-size: 0.9rem;
 }
 
 .ramo:hover {
-  background-color: var(--color-3);
+  background-color: var(--color-tres);
 }
 
 .ramo.aprobado {
-  background-color: var(--color-1);
+  background-color: var(--color-uno);
   color: white;
   text-decoration: line-through;
 }
 
+canvas {
+  margin-top: 1rem;
+}
+
 footer {
   text-align: center;
-  margin-top: 2rem;
-  font-size: 1rem;
+  padding: 1rem;
+  font-size: 0.8rem;
+  background-color: var(--color-dos);
 }
 
-canvas#grafico {
-  max-width: 600px;
-  margin-top: 1rem;
-  width: 100%;
-}
-
-@media screen and (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
+/* Móvil */
+@media screen and (max-width: 600px) {
+  progress {
+    width: 80%;
   }
 
-  .progreso {
-    font-size: 0.9rem;
-  }
-
-  #contenedor-malla {
+  main {
     grid-template-columns: 1fr;
+  }
+
+  canvas {
+    width: 150px !important;
+    height: 150px !important;
   }
 }
